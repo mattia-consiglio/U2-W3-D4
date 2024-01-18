@@ -10,6 +10,11 @@
 	cursor: pointer;
 }
 
+.modal-body img {
+	max-height: 80vh;
+	width: auto;
+}
+
 @media (min-width: 768px) {
 	.jumbotron {
 		padding-top: 6rem;
