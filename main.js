@@ -4,6 +4,7 @@ const authKey = 'yGouJIjA7ucIWgU0ldCFztPdvbY1tMMYPV5ALVEFfJnLqJNFRPqVxlVB' //ple
 const imagesContainer = document.getElementById('images')
 let timeLastChange = new Date()
 const searchDelay = 500
+const emptyBtn = document.getElementById('emptyBtn')
 
 const createCard = item => {
 	const col = document.createElement('div')
@@ -51,7 +52,10 @@ const createCards = items => {
 
 const search = query => {
 	images.length = 0
-	fetch(`https://api.pexels.com/v1/search?query=${query}&per_page=9`, {
+	imagesContainer.innerHTML = `<div class="spinner-border" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>`
+	fetch(`https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=9`, {
 		headers: {
 			Authorization: authKey,
 		},
@@ -75,7 +79,8 @@ const search = query => {
 
 const emptySearch = () => {
 	searchInput.value = ''
-	imagesContainer.innerHTML = ''
+	imagesContainer.innerHTML = '<h3>No results found</h3>'
+	emptyBtn.style.display = 'none'
 }
 
 const displayModal = id => {
@@ -91,14 +96,21 @@ const displayModal = id => {
 }
 
 searchInput.addEventListener('keyup', event => {
-	if (searchInput.value.length < 1) {
+	console.log(emptyBtn)
+	if (searchInput.value.trim().length < 1) {
+		emptyBtn.style.display = 'none'
+		emptySearch()
 		return
 	}
+	emptyBtn.style.display = 'block'
+	imagesContainer.innerHTML = `<div class="spinner-border" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>`
 	timeLastChange = new Date()
 	setTimeout(() => {
 		if (new Date() - timeLastChange < searchDelay) {
 			return
 		}
-		search(searchInput.value)
+		search(searchInput.value.trim())
 	}, searchDelay)
 })
