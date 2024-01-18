@@ -8,6 +8,7 @@ const emptyBtn = document.getElementById('emptyBtn')
 let currentSearch = ''
 let currentPage = 1
 let totalPages = 1
+const pagination = document.getElementById('pagination')
 
 const createCard = item => {
 	const col = document.createElement('div')
@@ -88,7 +89,6 @@ const changePage = element => {
 
 const createPagination = () => {
 	totalPages = totalPages || 1
-	const pagination = document.getElementById('pagination')
 	pagination.innerHTML = ''
 	if (totalPages <= 1) {
 		return
@@ -160,6 +160,7 @@ const emptySearch = () => {
 	searchInput.value = ''
 	imagesContainer.innerHTML = '<h3>No results found</h3>'
 	emptyBtn.style.display = 'none'
+	pagination.innerHTML = ''
 }
 
 const displayModal = id => {
