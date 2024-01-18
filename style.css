@@ -5,6 +5,11 @@
 	background-color: #fff;
 }
 
+.card img,
+.card-title {
+	cursor: pointer;
+}
+
 @media (min-width: 768px) {
 	.jumbotron {
 		padding-top: 6rem;
