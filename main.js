@@ -11,7 +11,7 @@ const createCard = item => {
 	// file deepcode ignore DOMXSS: It't a test project
 	col.innerHTML = `
 	<div class="card mb-4 shadow-sm h-100">
-              <img src="${item.src.medium}" class="bd-placeholder-img card-img-top img-fluid" width="${item.width}" height="${item.height}" onclick="displayModal(${item.id})" style="background-color: ${item.avg_color}" />
+              <img src="${item.src.medium}" class="bd-placeholder-img card-img-top img-fluid" width="${item.width}" height="${item.height}" onclick="displayModal(${item.id})"  alt="${item.alt}"style="background-color: ${item.avg_color}" />
               <div class="card-body d-flex flex-column">
                 <div class="flex-grow-1">
 									<h5 class="card-title" onclick="displayModal(${item.id})">${item.alt}</h5>
@@ -83,7 +83,7 @@ const displayModal = id => {
 	const modal = document.getElementById('modal')
 	modal.querySelector('.modal-title').innerText = item.alt
 	modal.querySelector('.modal-body').innerHTML = `
-	<img src="${item.src.large}" class="img-fluid" />
+	<img src="${item.src.large}" class="img-fluid" alt="${item.alt} />
 	<p class="bg-light">Photo by: <a href="${item.photographer_url}" target="_blank" rel="nofollow noopener">${item.photographer}</a></p>
 	`
 	modal.querySelector('.modal-body').style.backgroundColor = item.avg_color
